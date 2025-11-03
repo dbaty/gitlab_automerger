@@ -155,9 +155,10 @@ def merge(project, mr):
                 print(error(f"└ cannot be merged, because {mr.detailed_merge_status}"))
                 return False
         else:
-            if job_restart_attempts > MAXIMUM_JOB_RETRIES:
+            if job_restart_attempts >= MAXIMUM_JOB_RETRIES:
                 print(error("└ aborted merge, too much job retries"))
                 return False
+            job_restart_attempts += 1
             print(neutral("└ restarting failed jobs..."))
             pipeline.retry()
 
