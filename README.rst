@@ -1,6 +1,6 @@
-A tool that takes care of merging approved merge requests, on GitLab
-(gitlab.com or self-managed). It sets them as "auto-merge", rebases
-the corresponding branches, and restarts CI jobs that randomly
+A tool that takes care of merging series of approved merge requests,
+on GitLab (gitlab.com or self-managed). It sets them as "auto-merge",
+rebases the corresponding branches, and restarts CI jobs that randomly
 fail. Without you having to supervise anything.
 
 
@@ -20,7 +20,7 @@ You pause. You take a breath. Then you run:
 
 .. code-block::
 
-    $ gitlab_automerger --author jdoe
+    $ gitlab_automerger --repository group/my-project --author jdoe
 
 … and get back to what it is you were working on, while the tool, with
 its (almost) infinite patience, handles your merge requests.
@@ -66,20 +66,21 @@ To merge all approved requests of a specific users:
 
 .. code-block::
 
-    $ gitlab_automerger --repository org/poject --author jsmith
+    $ gitlab_automerger --repository org/project --author jsmith
 
 To merge 2 specific merge requests:
 
 .. code-block::
 
-    $ gitlab_automerger --repository org/poject --mr 123 --mr 245
+    $ gitlab_automerger --repository org/project --mr 123 --mr 245
 
-If one of the specified merge request is not approved, an error
-message is displayed and the merge request is not processed. This is a
-safety belt, in case you provide the wrong number and your GitLab
-projet settings would not block the merge.
+If one of the specified merge requests is not approved, an error
+message is displayed and the merge request is not processed. Other
+merge requests will be processed. This is a safety belt, in case you
+provide the wrong number and your GitLab projet settings would not
+block the merge.
 
-The other main feature:
+The other main feature is the ``help`` command:
 
 .. code-block::
 
